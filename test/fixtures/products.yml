@@ -7,6 +7,7 @@ one:
   price: 9.99
 
 two:
+<<<<<<< HEAD
   title: MyOthertring
   description: MyText
   image_url: MyString
@@ -22,3 +23,9 @@ ruby:
   price:       49.50
   image_url:   ruby.png 
 #END:ruby
+=======
+  title: MyString
+  description: MyText
+  image_url: MyString
+  price: 9.99
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16

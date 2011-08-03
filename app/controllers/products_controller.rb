@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
   # GET /products
   # GET /products.xml
   def index
@@ -36,6 +40,7 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
   end
+<<<<<<< HEAD
 
   # POST /products
   # POST /products.xml
@@ -52,6 +57,25 @@ class ProductsController < ApplicationController
       end
     end
   end
+=======
+  # POST /products
+  # POST /products.xml
+  def create
+     @product = Product.new(params[:products])
+    @filename=save_file   #调用save_file方法，返回文件名
+     @product.image_url="/uploads/#{@filename}"   #保存文件路径字段
+     @product.title=params[:product][:title]
+    @product.description=params[:product][:description]
+    @product.price=params[:product][:price]
+     
+     if @product.save
+       flash[:notice] = 'Photo was successfully created.'
+       redirect_to :action => 'index'
+     else
+       render :action => 'new'
+     end
+   end
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
 
   # PUT /products/1
   # PUT /products/1.xml
@@ -80,4 +104,36 @@ class ProductsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+<<<<<<< HEAD
+=======
+  
+   def configure_charsets   
+     @headers["Content-Type"]="text/html;charset=utf-8"  
+   end         
+  def upload
+    
+   end
+ def upload_file(file)   
+     if !file.original_filename.empty?   
+       @filename=get_file_name(file.original_filename)    
+       File.open("#{RAILS_ROOT}/public/uploads/#{@filename}", "wb") do |f|   
+       f.write(file.read)   
+       end   
+       return @filename  
+     end   
+   end   
+ def get_file_name(filename)   
+     if !filename.nil?   
+       Time.now.strftime("%Y%m%d%H%M%S") + '_' + filename   
+     end   
+   end   
+ def save_file
+     unless request.get?   
+       if filename=upload_file(params[:file]['file'])   
+         return filename   
+       end   
+     end   
+   end   
+
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
 end

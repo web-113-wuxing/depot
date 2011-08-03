@@ -14,17 +14,30 @@ class CartsController < ApplicationController
   # GET /carts/1.xml
   def show
     begin
+<<<<<<< HEAD
       @cart = Cart.find(params[:id])
+=======
+    @cart = Cart.find(params[:id])
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
     rescue ActiveRecord::RecordNotFound
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_url, :notice => 'Invalid cart'
     else
+<<<<<<< HEAD
       respond_to do |format|
         format.html # show.html.erb
         format.xml  { render :xml => @cart }
       end
     end
   end
+=======
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @cart }
+    end
+  end
+  end
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
 
   # GET /carts/new
   # GET /carts/new.xml
@@ -80,9 +93,15 @@ class CartsController < ApplicationController
     @cart = Cart.find(params[:id])
     @cart.destroy
     session[:cart_id] = nil
+<<<<<<< HEAD
 
     respond_to do |format|
       format.html { redirect_to(store_url) }
+=======
+    
+    respond_to do |format|
+      format.html { redirect_to(store_url,:notice => '您的购物车已经清空') }
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
       format.xml  { head :ok }
     end
   end

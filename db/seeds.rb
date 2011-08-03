@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # encoding: utf-8
 Product.delete_all
 Product.create(:title => 'Web Design for Developers',
@@ -37,3 +38,12 @@ Product.create(:title => 'Rails Test Prescriptions',
       </p>},
   :image_url => '/images/rtp.jpg',
   :price => 43.75)
+=======
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
+#   Mayor.create(:name => 'Daley', :city => cities.first)
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16

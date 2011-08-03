@@ -1,4 +1,5 @@
 <% if notice %>
+<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
 <% end %>
 
@@ -16,4 +17,21 @@
         	
         </div>
 	</div>
+=======
+<P id="notice"><%= notice %></p>
+<% end%>
+<h1>Your Pragmatic Catalog</h1>
+
+<% @products.each do |product| %>
+
+<div class="entry">
+	<%= image_tag(product.image_url)%>
+	<h3><%= product.title %></h3>
+	<%= sanitize product.description%>
+	<div class="price_line">
+		<span class="price"><%= number_to_currency(product.price) %></span> 
+   <%=button_to '加入购物车', line_items_path(:product_id => product)%>
+	</div>
+</div>
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
 <% end %>

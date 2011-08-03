@@ -5,6 +5,7 @@ class ProductTest < ActiveSupport::TestCase
   test "the truth" do
     assert true
   end
+<<<<<<< HEAD
   
   test "product attributes must not be empty " do
     product = Product.new
@@ -63,4 +64,6 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal I18n.translate('activerecord.errors.messages.taken'), product.errors[:title].join(';')
   end
   
+=======
+>>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
 end
