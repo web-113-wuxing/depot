@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 <%= form_for(@product) do |f| %>
-=======
-<% form_for :product,
-             :url => {:action => :create, :id => @product},
-             :html => {:multipart => true} do |f|
-             %>
->>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
   <% if @product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -23,30 +16,18 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-<<<<<<< HEAD
     <%= f.label :description %><br />
-=======
-    <%= f.label :description %><br/>
->>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
     <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :image_url %><br />
-<<<<<<< HEAD
     <%= f.text_field :image_url %>
-=======
-    Upload your file: <%= file_field("file", "file") %>  
->>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
   </div>
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
   <div class="actions">
-<<<<<<< HEAD
     <%= f.submit %>
-=======
-     <%= submit_tag("Upload file") %>  
->>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
   </div>
 <% end %>

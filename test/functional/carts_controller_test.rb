@@ -44,10 +44,6 @@ class CartsControllerTest < ActionController::TestCase
       delete :destroy, :id => @cart.to_param
     end
 
-<<<<<<< HEAD
     assert_redirected_to store_path
-=======
-    assert_redirected_to carts_path
->>>>>>> 826f5d5cba463d2480cb29af606c91f316815b16
   end
 end
