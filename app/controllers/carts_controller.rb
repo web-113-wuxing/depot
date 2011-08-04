@@ -1,17 +1,15 @@
 class CartsController < ApplicationController
-  # GET /carts
-  # GET /carts.xml
+ 
   def index
     @carts = Cart.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.xml  { render :xml => @carts }
     end
   end
 
-  # GET /carts/1
-  # GET /carts/1.xml
+ 
   def show
     begin
       @cart = Cart.find(params[:id])
@@ -20,30 +18,27 @@ class CartsController < ApplicationController
       redirect_to store_url, :notice => 'Invalid cart'
     else
       respond_to do |format|
-        format.html # show.html.erb
+        format.html 
         format.xml  { render :xml => @cart }
       end
     end
   end
 
-  # GET /carts/new
-  # GET /carts/new.xml
+
   def new
     @cart = Cart.new
-
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @cart }
     end
   end
 
-  # GET /carts/1/edit
+  
   def edit
     @cart = Cart.find(params[:id])
   end
 
-  # POST /carts
-  # POST /carts.xml
+  
   def create
     @cart = Cart.new(params[:cart])
 
@@ -58,8 +53,7 @@ class CartsController < ApplicationController
     end
   end
 
-  # PUT /carts/1
-  # PUT /carts/1.xml
+  
   def update
     @cart = Cart.find(params[:id])
 
@@ -74,8 +68,7 @@ class CartsController < ApplicationController
     end
   end
 
-  # DELETE /carts/1
-  # DELETE /carts/1.xml
+
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
