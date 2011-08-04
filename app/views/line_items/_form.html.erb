@@ -3,7 +3,6 @@
     <div id="error_explanation">
       <h2><%= pluralize(@line_item.errors.count, "error") %> prohibited this line_item from being saved:</h2>
 
-
       <ul>
       <% @line_item.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
 
   <div class="field">
     <%= f.label :product_id %><br />

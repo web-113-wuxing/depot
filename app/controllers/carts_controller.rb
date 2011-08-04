@@ -1,44 +1,50 @@
 class CartsController < ApplicationController
- 
+    skip_before_filter :authorize, :only =>[:create, :update, :delete] 
+  # GET /carts
+  # GET /carts.xml
   def index
     @carts = Cart.all
 
     respond_to do |format|
-      format.html 
+      format.html # index.html.erb
       format.xml  { render :xml => @carts }
     end
   end
 
- 
+  # GET /carts/1
+  # GET /carts/1.xml
   def show
     begin
-      @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_url, :notice => 'Invalid cart'
     else
-      respond_to do |format|
-        format.html 
-        format.xml  { render :xml => @cart }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @cart }
     end
   end
+  end
 
-
+  # GET /carts/new
+  # GET /carts/new.xml
   def new
     @cart = Cart.new
+
     respond_to do |format|
-      format.html
+      format.html # new.html.erb
       format.xml  { render :xml => @cart }
     end
   end
 
-  
+  # GET /carts/1/edit
   def edit
     @cart = Cart.find(params[:id])
   end
 
-  
+  # POST /carts
+  # POST /carts.xml
   def create
     @cart = Cart.new(params[:cart])
 
@@ -53,7 +59,8 @@ class CartsController < ApplicationController
     end
   end
 
-  
+  # PUT /carts/1
+  # PUT /carts/1.xml
   def update
     @cart = Cart.find(params[:id])
 
@@ -68,14 +75,15 @@ class CartsController < ApplicationController
     end
   end
 
-
+  # DELETE /carts/1
+  # DELETE /carts/1.xml
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
     session[:cart_id] = nil
-
+    
     respond_to do |format|
-      format.html { redirect_to(store_url) }
+      format.html { redirect_to(store_url,:notice => '您的购物车已经清空') }
       format.xml  { head :ok }
     end
   end
