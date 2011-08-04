@@ -6,9 +6,7 @@
 # We make no guarantees that this code is fit for any purpose. 
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
-require './app/store'
 Depot::Application.routes.draw do
-  match 'store' => StoreApp.new
   get 'admin' => 'admin#index'
   controller :sessions do
     get  'login' => :new
@@ -17,9 +15,7 @@ Depot::Application.routes.draw do
   end
   scope '(:locale)' do
     resources :users
-    resources :orders do
-      resources :line_items
-    end
+    resources :orders
     resources :line_items
     resources :carts
     resources :products do
