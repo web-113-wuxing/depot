@@ -5,32 +5,33 @@
 
       <ul>
       <% @order.errors.full_messages.each do |msg| %>
-        <li><%= raw msg %></li>
+        <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name,t('.name')+":" %>
-    <%= f.text_field :name, :size => 40 %>
+  <div>
+    <%= f.label :name,"Name:" %><br />
+    <%= f.text_field :name,:size=>40 %>
   </div>
-  <div class="field">
-    <%= f.label :address, t('.address')+":" %>
-    <%= f.text_area :address, :rows => 3, :cols => 40 %>
+  
+  <div>
+    <%= f.label :address,"Address:" %><br />
+    <%= f.text_area :address,:row=>3,:cols=>40 %>
   </div>
-  <div class="field">
-    <%= f.label :email, t('.email')+":"  %>
-    <%= f.text_field :email, :size => 40 %>
+  
+  <div>
+    <%= f.label :email,"E-Mail:" %><br />
+    <%= f.text_field :email,:size=>40 %>
   </div>
-  <div class="field">
-    <%= f.label :pay_type, t('.email')+":" %>
-    <%= f.select :pay_type,
-                  Order::PAYMENT_TYPES,
-                  :prompt => t('.pay_prompt')   
-     %>
+  
+  <div>
+    <%= f.label :pay_type,"Pay with:" %><br />
+    <%= f.select :pay_type,Order::PAYMENT_TYPES,:prompt=>"Select a payment method" %>
   </div>
-  <div class="actions">
-    <%= f.submit t('.submit') %>
+  
+  <div>
+    <%= f.submit "Place Order" %>
   </div>
 <% end %>

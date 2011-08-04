@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
-   skip_before_filter :authorize,:only => [:new, :create]
-# GET /orders
+  skip_before_filter :authorize,:only=>[:new,:create]
+  # GET /orders
   # GET /orders.xml
   def index
-    @orders = Order.paginate :page=>params[:page], :order=>'created_at desc',
-    :per_page => 10
+    @orders = Order.paginate :page=>params[:page],:order=>'created_at desc',:per_page=>10
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +26,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     if current_cart.line_items.empty?
-      redirect_to store_url, :notice =>"Your cart is empty"
+      redirect_to store_url,:notice=>"Your cart is empty"
       return
     end
     @order = Order.new
@@ -48,13 +47,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.add_line_items_from_cart(current_cart)
+
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
+        session[:cart_id]=nil
         Notifier.order_received(@order).deliver
-        format.html { redirect_to(store_url, :notice => I18n.t('.thanks')) }
-        
+        format.html { redirect_to(store_url, :notice => 'Thank you for your order.') }
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else
         format.html { render :action => "new" }
