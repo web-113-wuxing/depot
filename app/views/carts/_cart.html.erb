@@ -1,19 +1,44 @@
-<!-- START_HIGHLIGHT -->
-<div class="cart_title"><%= t('.title') %></div>
-<!-- END_HIGHLIGHT -->
+<!-- <% unless cart.line_items.empty? %> -->
+
+<!-- <p id="notice"><%= notice %></p> -->
+<% if notice %>
+<p id = "notice"><%= notice %></p>
+<% end %>
+
+<!-- <h2>Your Pragmatic Cart</h2> -->
+<div class = "cart_title"><%= t('.title') %></div>
+
+<!--
+<ul>
+	<% for item in @cart.line_items %>
+	<li>
+		<%= item.quantity %> &times; <%= item.product.title %>
+	</li>
+	<% end %>
+</ul>
+-->
 <table>
-  <%= render(cart.line_items) %>
-
-  <tr class="total_line">
-    <td colspan="2">Total</td>
-    <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
-  </tr>
-
+	<!--
+	<% for item in @cart.line_items %>
+		<tr>
+			<td> <%= item.quantity %> &times; </td>
+			<td> <%= item.product.title %></td>
+			<td class = "item_price"> <%= number_to_currency(item.total_price) %></td>
+		</tr>
+	<% end %>
+	-->
+	<%= render(cart.line_items) %>
+	
+	<tr class = "total_line">
+		<td colspan = "2"> Total </td>
+		<td class = "total_cell"> <%= number_to_currency(cart.total_price) %> </td>
+	</tr>
 </table>
-<!-- START_HIGHLIGHT -->
-<%= button_to t('.checkout'), new_order_path, :method => :get %>
-<!-- END_HIGHLIGHT -->
-<!-- START_HIGHLIGHT -->
-<%= button_to t('.empty'), cart, :method => :delete,
-# END_HIGHLIGHT
-    :confirm => 'Are you sure?' %>
+<%= button_to t('.checkout'), new_order_url, :method => :get %>
+<%= button_to t('.empty'), cart, :method => :delete, :confirm => 'Are you sure?' %>
+
+<!--
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', carts_path %>
+-->
+<!-- <% end %> -->

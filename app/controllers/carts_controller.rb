@@ -1,16 +1,8 @@
-#---
-# Excerpted from "Agile Web Development with Rails, 4rd Ed.",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
-# Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
-#---
 class CartsController < ApplicationController
-    skip_before_filter :authorize, :only => [:create, :update, :destroy]
-
   # GET /carts
   # GET /carts.xml
+  skip_before_filter :authorize, :only => [:create, :update, :delete]
+  
   def index
     @carts = Cart.all
 
@@ -20,11 +12,12 @@ class CartsController < ApplicationController
     end
   end
 
-  # GET /carts/1
+ # GET /carts/1
   # GET /carts/1.xml
   def show
     begin
       @cart = Cart.find(params[:id])
+
     rescue ActiveRecord::RecordNotFound
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_url, :notice => 'Invalid cart'
@@ -34,6 +27,7 @@ class CartsController < ApplicationController
         format.xml  { render :xml => @cart }
       end
     end
+
   end
 
   # GET /carts/new
@@ -87,13 +81,14 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.xml
   def destroy
-    @cart = current_cart
+    @cart = Cart.find(params[:id])
     @cart.destroy
     session[:cart_id] = nil
-
+    
     respond_to do |format|
       format.html { redirect_to(store_url) }
       format.xml  { head :ok }
     end
   end
+  
 end
