@@ -220,3 +220,14 @@
   margin: -0.25em 0.1em;
 }
 /* END:i18n */
+
+#question  .entry {
+  overflow: auto;
+  margin-top: 1em;
+  border-bottom: 1px dotted #77d;
+}
+
+#question .entry p {
+ margin-top: 0.5em; 
+ margin-bottom: 0.8em; 
+}

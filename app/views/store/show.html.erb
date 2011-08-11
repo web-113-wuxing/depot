@@ -1,0 +1,26 @@
+<!-- <p id="notice"><%= notice %></p> -->
+<% if notice %>
+<p id = "notice"><%= notice %></p>
+<% end %>
+
+<div class = "entry">
+	<%= image_tag(@product.image_url) %>
+	<h3><%= @product.title %></h3>
+	<%= sanitize @product.description %>
+	<div class = "price_line">
+		<span class = "price"><%= number_to_currency(@product.price) %></span>
+		<%= button_to 'Add to Cart', line_items_path(:product_id => @product.id), :remote => true %>
+	</div>
+</div>
+	
+<p>
+  <b>Comments:</b>
+</p>
+<% @product.comments.each do |comment| %>
+	<p><%= comment.content %></p>
+	<br />
+<% end %>
+
+
+<%= link_to 'Add Comment', new_comment_path(:product_id => @product.id) %>
+<%= link_to 'Back', store_path %>

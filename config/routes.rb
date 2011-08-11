@@ -1,10 +1,17 @@
 Depot::Application.routes.draw do
+  resources :questions
+
+  get "store/show"
+
+  resources :comments
+
   get 'admin' => 'admin#index'
   controller :sessions do
     get  'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
+  
   scope '(:locale)' do
     resources :users
     resources :orders

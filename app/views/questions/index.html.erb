@@ -1,0 +1,27 @@
+<h1>Q&A</h1>
+
+
+
+<% @questions.each do |question| %>
+
+  	<div class = "entry">
+  	<h3><%= question.title %></h3>
+    <p><%= question.content %></p>
+    
+    <% if question.reply %>
+    	<h5>Reply:</h5>
+    	<p><%= question.reply %></p>
+    <% end %>
+    
+    <% if session[:user_id] %>
+    	<td><%= link_to 'Show', question %></td>
+    	<td><%= link_to 'Reply', edit_question_path(question) %></td>
+    	<td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+    </div>
+<% end %>
+
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>
