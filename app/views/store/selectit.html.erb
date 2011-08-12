@@ -11,11 +11,13 @@
     <%= submit_tag "" , :id => 'go' %>
     <% end %>
 </div>
+
 <% @products.each do |product| %>
-	<div class="entry">		
+	<div class="entry">
+		
 		<div class="sotre_img"><%= image_tag(product.image_url) %></div>
         <div class="sotre_msg">
-      <h3><%= link_to product.title, :action => 'show', :id => product %></h3>
+        <h3><%= product.title %></h3>
         <%=sanitize product.description %>
         <div class="price_line">
         	<span class="price"><%= number_to_currency(product.price) %></span>
@@ -27,7 +29,3 @@
 <% end %>
 </div>
 </div>
-  <div class="store_tuijian">
-     <%=image_tag(@best_product.image_url)%>
-     <h3><%=@best_product.title%></h3>
-    </div> 

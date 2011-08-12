@@ -1,8 +1,11 @@
-Depot::Application.routes.draw do
+Depot::Application.routes.draw do |map| 
+  resources :photos
+
   resources :questions
 
   get "store/show"
-
+map.resources :store, :collection=>{:selectit=>:post}
+get 'store' => 'store#selectit'
   resources :comments
 
   get 'admin' => 'admin#index'
