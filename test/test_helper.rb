@@ -5,18 +5,18 @@ require 'rails/test_help'
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
-  fixtures :all
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   def login_as(user)
     session[:user_id]=users(user).id
   end
   def logout
-    session.delete :user_id
+    session.delete :user.id
   end
   def setup
     login_as :one if defined? session
   end
+  fixtures :all
 
   # Add more helper methods to be used by all tests here...
 end

@@ -20,7 +20,29 @@ en:
         delimiter: ","
         format:    "%u%n"
 #END:currency
-
+#START:errors
+  activerecord:
+#END:errors
+    models:
+      order:       "order"
+    attributes:
+      order:
+        address:   "Address"
+        name:      "Name"
+        email:     "E-mail"
+        pay_type:  "pay_type"
+#END:model
+#START:errors
+    errors:
+      messages:
+        inclusion: "is not include in the list"
+        blank:     "can't be blank"
+  errors:
+    template:
+      body:        "There are problems with the following fields:"
+      header:
+        one:       "1 error prohibited this order from being saved"
+        other:     "%{count} errores prohibited this order from being saved"
 #START:layout
   layouts:
     application:
@@ -52,14 +74,13 @@ en:
       legend:       "Please Enter Your Details"
     form:
       name:         "Name"
-      address_html: "Address"
+      address: "Address"
       email:        "E-mail"
       pay_type:     "Pay with"
-      pay_prompt_html: "Select a payment method"
+      pay_prompt: "Select a payment method"
       submit:       "Place Order"
 #END:checkout
 
 #START:flash
   thanks:          "Thank you for your order"
 #END:flash
-

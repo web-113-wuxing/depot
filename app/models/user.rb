@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :name, :presence=>true, :uniqueness=>true
   validates :password, :confirmation=>true
   attr_accessor :password_confirmation
-  attr_reader   :password
+  attr_reader :password
   
   validate :password_must_be_present
   class<<self
@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
       self.hashed_password=self.class.encrypt_password(password,salt)
     end
   end
+  
   after_destroy :ensure_an_admin_remains
   def ensure_an_admin_remains
     if User.count.zero?
