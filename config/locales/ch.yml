@@ -59,6 +59,7 @@ ch:
       questions:   "问题"
       news:        "消息"
       contact:     "联系"
+      help:        "帮助"
 #END:layout
 
 #START:cart
