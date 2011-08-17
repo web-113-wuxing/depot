@@ -1,7 +1,8 @@
 class LineItemsController < ApplicationController
-  skip_before_filter :authorize,:only=>:create
   # GET /line_items
   # GET /line_items.xml
+  skip_before_filter :authorize, :only => :create
+  
   def index
     @line_items = LineItem.all
 
@@ -47,8 +48,9 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to(store_url) }
-        format.js   { @current_item = @line_item }
+        #format.html { redirect_to(@line_item.cart,:notice => 'Line item was successfully created.') }        
+        format.html { redirect_to(store_url) }   
+        format.js { @current_item = @line_item }     
         format.xml  { render :xml => @line_item, :status => :created, :location => @line_item }
       else
         format.html { render :action => "new" }
@@ -64,7 +66,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.update_attributes(params[:line_item])
-        format.html { redirect_to(@line_item, :notice => 'Line item was successfully updated.') }
+        #format.html { redirect_to(@line_item, :notice => 'Line item was successfully updated.') }
+        format.html { redirect_to(@line_item) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -84,4 +87,5 @@ class LineItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

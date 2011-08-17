@@ -44,14 +44,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(users_url, 
-          :notice => 'User #{@user.name} was successfully created.') }
-        format.xml  { render :xml => @user, 
-          :status => :created, :location => @user }
+        format.html { redirect_to(users_url, :notice => "User #{@user.name} was successfully created.") }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, 
-          :status => :unprocessable_entity }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -63,8 +60,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(users_url, 
-          :notice => "User #{@user.name} was successfully updated.") }
+        format.html { redirect_to(users_url, :notice => "User #{@user.name} was successfully updated.") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,11 +75,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     begin
       @user.destroy
-      flash[:notice]="User #{@user.name} deleted"
-      
-    rescue Exception=>e
-      flash[:notice]=e.message
+      flash[:notice] = "User #{@user.name} deleted"
+    rescue Exception => e
+      flash[:notice] = e.message
     end
+    
 
     respond_to do |format|
       format.html { redirect_to(users_url) }

@@ -1,23 +1,20 @@
-#---
-# Excerpted from "Agile Web Development with Rails, 4rd Ed.",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
-# Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
-#---
-Depot::Application.routes.draw do
-  get "information/index"
+Depot::Application.routes.draw do |map| 
+  resources :photos
 
-  resources :messages
+  resources :questions
+
+  get "store/show"
+map.resources :store, :collection=>{:selectit=>:post}
+get 'store' => 'store#selectit'
+  resources :comments
 
   get 'admin' => 'admin#index'
-  get 'help' => 'help#index'
   controller :sessions do
     get  'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
+  
   scope '(:locale)' do
     resources :users
     resources :orders

@@ -10,9 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809034125) do
+ActiveRecord::Schema.define(:version => 20110812034533) do
 
   create_table "carts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "product_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,12 +33,6 @@ ActiveRecord::Schema.define(:version => 20110809034125) do
     t.integer  "order_id"
   end
 
-  create_table "messages", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "orders", :force => true do |t|
     t.string   "name"
     t.text     "address"
@@ -41,11 +42,28 @@ ActiveRecord::Schema.define(:version => 20110809034125) do
     t.datetime "updated_at"
   end
 
+  create_table "photos", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "image_url"
     t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "mark",        :default => 0
+    t.string   "fenlei"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.text     "reply"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

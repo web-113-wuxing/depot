@@ -3,7 +3,7 @@
 
   <table>
   <% @products.each do |product| %>
-    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <tr class="product_tr">
 
       <td>
         <%= image_tag(product.image_url, :class => 'list_image') %>
@@ -32,3 +32,4 @@
 <br />
 
 <%= link_to 'New product', new_product_path %>
+ <%= link_to 'Product photo ', photos_path %>
