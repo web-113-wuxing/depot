@@ -1,8 +1,7 @@
 class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.xml
-  skip_before_filter :authorize, :only => :create
-  
+   skip_before_filter :authorize,:only=>:create
   def index
     @line_items = LineItem.all
 
@@ -43,14 +42,20 @@ class LineItemsController < ApplicationController
   # POST /line_items.xml
   def create
     @cart = current_cart
-    product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
-
+    if params[:line_item]
+      # ActiveResource
+      params[:line_item][:order_id] = params[:order_id]
+      @line_item = LineItem.new(params[:line_item])
+    else
+      # HTML forms
+      product = Product.find(params[:product_id])
+      @line_item = @cart.add_product(product.id)
+    end
+	 
     respond_to do |format|
       if @line_item.save
-        #format.html { redirect_to(@line_item.cart,:notice => 'Line item was successfully created.') }        
-        format.html { redirect_to(store_url) }   
-        format.js { @current_item = @line_item }     
+        format.html { redirect_to(store_url) }
+        format.js   {@current_item = @line_item}
         format.xml  { render :xml => @line_item, :status => :created, :location => @line_item }
       else
         format.html { render :action => "new" }
@@ -66,8 +71,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.update_attributes(params[:line_item])
-        #format.html { redirect_to(@line_item, :notice => 'Line item was successfully updated.') }
-        format.html { redirect_to(@line_item) }
+        format.html { redirect_to(@line_item, :notice => 'Line item was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -87,5 +91,4 @@ class LineItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
 end

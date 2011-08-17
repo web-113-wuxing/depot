@@ -1,10 +1,9 @@
 class ProductsController < ApplicationController
- 
   # GET /products
   # GET /products.xml
   def index
     @products = Product.all
-    @recphoto = Photo.selectphoto
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @products }
@@ -37,23 +36,22 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
   end
+
   # POST /products
   # POST /products.xml
   def create
-     @product = Product.new(params[:products])
-    @filename=save_file   #调用save_file方法，返回文件名
-     @product.image_url="/uploads/#{@filename}"   #保存文件路径字段
-     @product.title=params[:product][:title]
-    @product.description=params[:product][:description]
-    @product.price=params[:product][:price]
-    @product.mark=params[:product][:mark] 
-     if @product.save
-       flash[:notice] = 'Photo was successfully created.'
-       redirect_to :action => 'index'
-     else
-       render :action => 'new'
-     end
-   end
+    @product = Product.new(params[:product])
+
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
+        format.xml  { render :xml => @product, :status => :created, :location => @product }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @product.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 
   # PUT /products/1
   # PUT /products/1.xml
@@ -75,46 +73,19 @@ class ProductsController < ApplicationController
   # DELETE /products/1.xml
   def destroy
     @product = Product.find(params[:id])
-    @product.delete
+    @product.destroy
+
     respond_to do |format|
       format.html { redirect_to(products_url) }
       format.xml  { head :ok }
     end
   end
   
-   def configure_charsets   
-     @headers["Content-Type"]="text/html;charset=utf-8"  
-   end         
-  def upload
-    
-   end
- def upload_file(file)   
-     if !file.original_filename.empty?   
-       @filename=get_file_name(file.original_filename)    
-       File.open("#{RAILS_ROOT}/public/uploads/#{@filename}", "wb") do |f|   
-       f.write(file.read)   
-       end   
-       return @filename  
-     end   
-   end   
- def get_file_name(filename)   
-     if !filename.nil?   
-       Time.now.strftime("%Y%m%d%H%M%S") + '_' + filename   
-     end   
-   end   
- def save_file
-     unless request.get?   
-       if filename=upload_file(params[:file]['file'])   
-         return filename   
-       end   
-     end   
-   end   
-def who_bought
-    @product = Product.find(params[:id])
+  def who_bought
+    @product=Product.find(params[:id])
     respond_to do |format|
-      format.html
       format.atom
-      format.xml { render :xml => @product }
+      format.xml{render :xml=>@product}
     end
   end
 end

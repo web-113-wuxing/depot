@@ -1,33 +1,16 @@
-
-<% if notice %>
-<p id="notice"><%= notice %></p>
-<% end %>
-<div class="store_main">
-<div class="nentry">
-	<div class="sousuo_index">
-  <% form_for :product,
-  :url => {:action => "selectit"} do |form|%>
-   <%= form.text_field :title, :size => 20,:id => 's',:value => 'Search' %>   
-    <%= submit_tag "" , :id => 'go' %>
-    <% end %>
-</div>
-<% @products.each do |product| %>
-	<div class="entry">		
-		<div class="sotre_img"><%= image_tag(product.image_url) %></div>
-        <div class="sotre_msg">
-      <h3><%= link_to product.title, :action => 'show', :id => product %></h3>
-        <%=sanitize product.description %>
-        <div class="price_line">
-        	<span class="price"><%= number_to_currency(product.price) %></span>
-        	</div>      	
-        </div>
-       <div calss="waddtocart"> <%= button_to '', line_items_path(:product_id => product), 
-        		:remote => true,:class => "submit_addtocart" %></div>
+<%if notice%>
+<p id="notice"><%=notice%></p>
+<%end%>
+<h1><%=t('.title_html')%></h1>
+<% @products.each do |product|%>
+   <div class="entry">
+       <%=image_tag(product.image_url)%>
+	   <h3><%=product.title%></h3>
+	   <%=sanitize product.description%>
+	   <div class="price_line">
+	       <span class="price"><%=number_to_currency(product.price)%></span>
+		   <%= button_to t('.add_html'), line_items_path(:product_id=>product),
+		     :remote=>true%>
+	   </div>
 	</div>
-<% end %>
-</div>
-</div>
-  <div class="store_tuijian">
-     <%=image_tag(@best_product.image_url)%>
-     <h3><%=@best_product.title%></h3>
-    </div> 
+<%end%>
